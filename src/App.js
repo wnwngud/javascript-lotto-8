@@ -23,11 +23,28 @@ function printNumOfLotto(coin) {
   return count;
 }
 
+function generateLotto(count) {
+  let lottos = [];
+  let randomNums;
+
+  for (let i = 0; i < count; i++) {
+    randomNums = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+    randomNums.sort((a, b) => a - b);
+
+    MissionUtils.Console.print(randomNums);
+    
+    lottos.push(randomNums);
+  }
+
+  return lottos;
+}
+
 class App {
   async run() {
     const COIN = await insertCoin();
     const COUNT = printNumOfLotto(COIN);
+    const LOTTOS = generateLotto(COUNT);
   }
 }
 
-export { App, validCoin };
+export { App, validCoin, generateLotto };
