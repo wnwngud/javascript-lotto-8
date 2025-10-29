@@ -1,7 +1,7 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 
 async function insertCoin() {
-  let coin = await MissionUtils.Console.readLineAsync("구입 금액을 입력해 주세요.\n");
+  let coin = await MissionUtils.Console.readLineAsync("구입금액을 입력해 주세요.\n");
 
   if (validCoin(coin)) return Number(coin);
 }
@@ -32,11 +32,16 @@ function generateLotto(count) {
     randomNums.sort((a, b) => a - b);
 
     MissionUtils.Console.print(randomNums);
-    
+
     lottos.push(randomNums);
   }
 
   return lottos;
+}
+
+async function insertWinningNumbers() {
+  let winningNumbers = await MissionUtils.Console.readLineAsync("\n당첨 번호를 입력해 주세요.\n");
+  return winningNumbers;
 }
 
 class App {
@@ -44,6 +49,7 @@ class App {
     const COIN = await insertCoin();
     const COUNT = printNumOfLotto(COIN);
     const LOTTOS = generateLotto(COUNT);
+    let tempWinningNumbers = insertWinningNumbers();
   }
 }
 
