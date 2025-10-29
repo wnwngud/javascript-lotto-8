@@ -2,7 +2,7 @@ import { validCoin } from "../src/App.js"
 
 describe.each([
     [1000, 0],
-    [' ', 1]
+    ['', 1],
     ['abc', 2],
     ['100a', 2],
     [1005, 3]
