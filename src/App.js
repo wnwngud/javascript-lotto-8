@@ -40,17 +40,30 @@ function generateLotto(count) {
 }
 
 async function insertWinningNumbers() {
-  let winningNumbers = await MissionUtils.Console.readLineAsync("\n당첨 번호를 입력해 주세요.\n");
-  return winningNumbers;
+  let inputNumbers = await MissionUtils.Console.readLineAsync("\n당첨 번호를 입력해 주세요.\n");
+  let strWinningNumbers = inputNumbers.split(',');
+  let winningNumbers = strWinningNumbers.map(Number);
+
+  if (validWinningNumbers(winningNumbers)) return winningNumbers;
 }
+
+function validWinningNumbers(winningNumbers) {
+  for (let num of winningNumbers) {
+    if (isNaN(num)) throw new Error("[ERROR] 잘못된 당첨 번호 양식입니다.");
+    if (num < 1 || num > 45) throw new Error("[ERROR] 당첨 번호는 1부터 45 사이의 수만 입력해주세요.");
+  }
+
+  return true;
+}
+
 
 class App {
   async run() {
     const COIN = await insertCoin();
     const COUNT = printNumOfLotto(COIN);
     const LOTTOS = generateLotto(COUNT);
-    let tempWinningNumbers = insertWinningNumbers();
+    const WINNING_NUMBERS = await insertWinningNumbers();
   }
 }
 
-export { App, validCoin, generateLotto };
+export { App, validCoin, generateLotto, insertWinningNumbers };

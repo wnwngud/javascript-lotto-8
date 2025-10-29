@@ -17,7 +17,7 @@ const ANSWER = [
     [4, 6, 28, 37, 39, 40],
     [2, 18, 25, 30, 41, 45],
     [5, 13, 24, 36, 40, 45]
-]
+];
 
 const RANDOM_NUMS = [
     [39, 37, 26, 36, 25, 6],
@@ -28,7 +28,7 @@ const RANDOM_NUMS = [
     [4, 6, 28, 37, 40, 39],
     [18, 2, 30, 25, 41, 45],
     [5, 13, 24, 36, 40, 45]
-]
+];
 
 describe.each([
     [8]
@@ -36,5 +36,5 @@ describe.each([
     it("로또 생성 검사", () => {
         mockRandoms(RANDOM_NUMS);
         expect(generateLotto(count)).toEqual(ANSWER);
-    })
-})
+    });
+});
