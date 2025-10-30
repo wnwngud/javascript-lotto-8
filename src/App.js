@@ -88,6 +88,11 @@ function getTotalReturn(matchCount) {
   return matchThree + matchFour + matchFive + matchFiveWithBonusNumber + matchSix;
 }
 
+function printRateOfReturn(coin, totalReturn) {
+  let rateOfReturn = (totalReturn / coin) * 100;
+  MissionUtils.Console.print(`총 수익률은 ${rateOfReturn.toFixed(1)}%입니다.`);
+}
+
 async function start() {
   const COIN = await insertCoin();
   const COUNT = printNumOfLotto(COIN);
@@ -97,6 +102,7 @@ async function start() {
   const BONUS_NUMBER = await insertBonusNumber();
   const MATCH_COUNT = LOTTO_WINNING_NUMBERS.printWinningResult(LOTTOS, BONUS_NUMBER);
   const TOTAL_RETURN = getTotalReturn(MATCH_COUNT);
+  printRateOfReturn(COIN, TOTAL_RETURN);
 }
 
 class App {
@@ -106,4 +112,4 @@ class App {
   }
 }
 
-export { App, validCoin, generateLotto, insertWinningNumbers, insertBonusNumber, getTotalReturn };
+export { App, validCoin, generateLotto, insertWinningNumbers, insertBonusNumber, getTotalReturn, printRateOfReturn };
