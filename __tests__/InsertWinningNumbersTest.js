@@ -21,7 +21,7 @@ const runWrongForm = async (input) => {
 
 const runWrongNumber = async (input) => {
     mockQuestions(input);
-    await expect(() => insertWinningNumbers()).rejects.toThrow("[ERROR] 당첨 번호는 1부터 45 사이의 수만 입력해주세요.");
+    await expect(() => insertWinningNumbers()).rejects.toThrow("[ERROR] 당첨 번호는 1부터 45 사이의 수만 입력해 주세요.");
 };
 
 describe.each([
@@ -30,10 +30,10 @@ describe.each([
     ["1,2/3,4,5,6", 1],
     ["46,1,2,3,4,5", 2]
 ])("insertWinningNumbers(%s)", (input, caseNumber) => {
-    if (caseNumber === 0) 
+    if (caseNumber === 0)
         it("당첨 번호 입력: 정상", async () => { runAnswer(input); });
-    if (caseNumber === 1) 
+    if (caseNumber === 1)
         it("당첨 번호 입력: 잘못된 양식 입력", async () => { runWrongForm(input); });
-    if (caseNumber === 2) 
+    if (caseNumber === 2)
         it("당첨 번호 입력: 잘못된 숫자 범위", async () => { runWrongNumber(input); });
 });
