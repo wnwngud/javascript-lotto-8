@@ -78,6 +78,16 @@ function validBonusNumber(inputBonusNumber) {
   return true;
 }
 
+function getTotalReturn(matchCount) {
+  let matchThree = matchCount[0] * 5000;
+  let matchFour = matchCount[1] * 50000;
+  let matchFive = matchCount[2] * 1500000;
+  let matchFiveWithBonusNumber = matchCount[3] * 30000000;
+  let matchSix = matchCount[4] * 2000000000;
+
+  return matchThree + matchFour + matchFive + matchFiveWithBonusNumber + matchSix;
+}
+
 async function start() {
   const COIN = await insertCoin();
   const COUNT = printNumOfLotto(COIN);
@@ -86,6 +96,7 @@ async function start() {
   const LOTTO_WINNING_NUMBERS = checkRedundancy(WINNING_NUMBERS);
   const BONUS_NUMBER = await insertBonusNumber();
   const MATCH_COUNT = LOTTO_WINNING_NUMBERS.printWinningResult(LOTTOS, BONUS_NUMBER);
+  const TOTAL_RETURN = getTotalReturn(MATCH_COUNT);
 }
 
 class App {
@@ -95,4 +106,4 @@ class App {
   }
 }
 
-export { App, validCoin, generateLotto, insertWinningNumbers, insertBonusNumber };
+export { App, validCoin, generateLotto, insertWinningNumbers, insertBonusNumber, getTotalReturn };
