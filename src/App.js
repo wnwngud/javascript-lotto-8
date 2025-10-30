@@ -3,6 +3,7 @@ import Lotto from "./Lotto.js";
 
 async function insertCoin() {
   let coin = await MissionUtils.Console.readLineAsync("구입금액을 입력해 주세요.\n");
+  MissionUtils.Console.print("");
 
   if (validCoin(coin)) return Number(coin);
 }
@@ -20,19 +21,20 @@ function validCoin(coin) {
 function printNumOfLotto(coin) {
   let count = coin / 1000;
 
-  MissionUtils.Console.print(`\n${count}개를 구매했습니다.`)
+  MissionUtils.Console.print(`${count}개를 구매했습니다.`);
   return count;
 }
 
 function generateLotto(count) {
   let lottos = [];
+  let lotto;
   let randomNums;
 
   for (let i = 0; i < count; i++) {
     randomNums = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
     randomNums.sort((a, b) => a - b);
 
-    MissionUtils.Console.print(randomNums);
+    MissionUtils.Console.print(`[${randomNums.join(', ')}]`);
 
     lottos.push(randomNums);
   }
