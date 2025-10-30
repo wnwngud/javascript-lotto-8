@@ -1,3 +1,5 @@
+import { MissionUtils } from "@woowacourse/mission-utils";
+
 class Lotto {
   #numbers;
 
@@ -23,6 +25,21 @@ class Lotto {
     else if (matchLength === 5) matchCount[2] += 1;
     else if (matchLength === 4) matchCount[1] += 1;
     else if (matchLength === 3) matchCount[0] += 1;
+  }
+
+  printWinningResult(lottos, bonusNumber) {
+    let matchCount = Array.from({ length: 5 }, () => 0);
+
+    for (let i = 0; i < lottos.length; i++) this.getHowManyMatch(lottos[i], matchCount, bonusNumber);
+
+    MissionUtils.Console.print("\n당첨 통계\n---");
+    MissionUtils.Console.print(`3개 일치 (5,000원) - ${matchCount[0]}개`);
+    MissionUtils.Console.print(`4개 일치 (50,000원) - ${matchCount[1]}개`);
+    MissionUtils.Console.print(`5개 일치 (1,500,000원) - ${matchCount[2]}개`);
+    MissionUtils.Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${matchCount[3]}개`);
+    MissionUtils.Console.print(`6개 일치 (2,000,000,000원) - ${matchCount[4]}개`);
+
+    return matchCount;
   }
 }
 

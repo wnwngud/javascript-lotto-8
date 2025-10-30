@@ -85,6 +85,7 @@ async function start() {
   const WINNING_NUMBERS = await insertWinningNumbers();
   const LOTTO_WINNING_NUMBERS = checkRedundancy(WINNING_NUMBERS);
   const BONUS_NUMBER = await insertBonusNumber();
+  const MATCH_COUNT = LOTTO_WINNING_NUMBERS.printWinningResult(LOTTOS, BONUS_NUMBER);
 }
 
 class App {
