@@ -80,12 +80,16 @@ function validBonusNumber(inputBonusNumber) {
 
 class App {
   async run() {
-    const COIN = await insertCoin();
-    const COUNT = printNumOfLotto(COIN);
-    const LOTTOS = generateLotto(COUNT);
-    const WINNING_NUMBERS = await insertWinningNumbers();
-    const LOTTO_WINNING_NUMBERS = checkRedundancy(WINNING_NUMBERS);
-    const BONUS_NUMBER = await insertBonusNumber();
+    try {
+      const COIN = await insertCoin();
+      const COUNT = printNumOfLotto(COIN);
+      const LOTTOS = generateLotto(COUNT);
+      const WINNING_NUMBERS = await insertWinningNumbers();
+      const LOTTO_WINNING_NUMBERS = checkRedundancy(WINNING_NUMBERS);
+      const BONUS_NUMBER = await insertBonusNumber();
+    } catch (err) {
+      MissionUtils.Console.print(err.message);
+    }
   }
 }
 
