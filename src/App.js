@@ -1,4 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
+import Lotto from "./Lotto.js";
 
 async function insertCoin() {
   let coin = await MissionUtils.Console.readLineAsync("구입금액을 입력해 주세요.\n");
@@ -56,6 +57,10 @@ function validWinningNumbers(winningNumbers) {
   return true;
 }
 
+function checkRedundancy(winningNumbers) {
+  let winningNumbersSet = new Set(winningNumbers);
+  return new Lotto([...winningNumbersSet]);
+}
 
 class App {
   async run() {
@@ -63,6 +68,7 @@ class App {
     const COUNT = printNumOfLotto(COIN);
     const LOTTOS = generateLotto(COUNT);
     const WINNING_NUMBERS = await insertWinningNumbers();
+    const LOTTO_WINNING_NUMBERS = checkRedundancy(WINNING_NUMBERS);
   }
 }
 
