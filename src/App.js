@@ -28,15 +28,14 @@ function printNumOfLotto(coin) {
 function generateLotto(count) {
   let lottos = [];
   let lotto;
-  let randomNums;
 
   for (let i = 0; i < count; i++) {
-    randomNums = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
-    randomNums.sort((a, b) => a - b);
+    lotto = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+    lotto.sort((a, b) => a - b);
 
-    MissionUtils.Console.print(`[${randomNums.join(', ')}]`);
+    MissionUtils.Console.print(`[${lotto.join(', ')}]`);
 
-    lottos.push(randomNums);
+    lottos.push(lotto);
   }
 
   return lottos;
