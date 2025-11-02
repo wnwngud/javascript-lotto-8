@@ -63,18 +63,21 @@ function checkRedundancy(winningNumbers) {
   return new Lotto([...winningNumbersSet]);
 }
 
-async function insertBonusNumber() {
+async function insertBonusNumber(winningNumbers) {
   let inputBonusNumber = await MissionUtils.Console.readLineAsync("\n보너스 번호를 입력해 주세요.\n");
 
-  if (validBonusNumber(inputBonusNumber)) return Number(inputBonusNumber);
+  if (validBonusNumber(inputBonusNumber, winningNumbers)) return Number(inputBonusNumber);
 }
 
-function validBonusNumber(inputBonusNumber) {
+function validBonusNumber(inputBonusNumber, winningNumbers) {
   let numBonusNumber = Number(inputBonusNumber);
 
   if (inputBonusNumber === '' || isNaN(numBonusNumber) ||
     numBonusNumber < 1 || numBonusNumber > 45)
     throw new Error("[ERROR] 보너스 번호는 1부터 45 사이의 수만 입력해 주세요.");
+
+  for (let num of winningNumbers)
+    if(num === numBonusNumber) throw new Error("[ERROR] 보너스 번호는 당첨 번호와 중복되지 않는 수를 입력해 주세요.")
 
   return true;
 }
@@ -100,7 +103,7 @@ async function start() {
   const LOTTOS = generateLotto(COUNT);
   const WINNING_NUMBERS = await insertWinningNumbers();
   const LOTTO_WINNING_NUMBERS = checkRedundancy(WINNING_NUMBERS);
-  const BONUS_NUMBER = await insertBonusNumber();
+  const BONUS_NUMBER = await insertBonusNumber(WINNING_NUMBERS);
   const MATCH_COUNT = LOTTO_WINNING_NUMBERS.printWinningResult(LOTTOS, BONUS_NUMBER);
   const TOTAL_RETURN = getTotalReturn(MATCH_COUNT);
   printRateOfReturn(COIN, TOTAL_RETURN);
